@@ -1,0 +1,47 @@
+{% extends '../base.html'%} 
+
+{% block content %}
+<div class="my-5">
+    <h3>Create a Project</h3>
+
+    <form method="post" class="col-6 mt-5">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="name">Project Name</label>
+            <input type="text" name="projectName" id="name" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="name">Description</label>
+            <textarea type="text" name="description" id="name" class="form-control" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="name">Status</label>
+            <select class="form-select" name="status">
+                <option value="1">In Progress</option>
+                <option value="2">Completed</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <input type="text" value={{user.id}} name="createdBy" id="name" class="form-control d-none" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="name">Assigned Manager</label>
+            <select class="form-select" name="assignedManager" required>
+                {% for u in users %}
+                    <option value={{u.id}}>{{ u.username }}</option>
+                {% endfor %}
+            </select>
+        </div>
+       
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Create project</button>
+        </div>
+    </form>
+
+</div>
+{%endblock%} 
